@@ -1,0 +1,124 @@
+<h1>Hello World!!!</h1>
+<h2 [title]="h2Title" [innerHTML]="html">{{title}}</h2>
+<p>{{2+4}}</p>
+
+<p>{{a+b}}</p>
+<p>{{a>5? "A is greater than 5": "A is not greater than 5"}}</p>
+<button (click)="buttonClicked($event)">click me</button>
+<p (mouseover)="mouseOverHandler($event)" (mouseout)="mouseOutHandler($event)"
+    [style.color]="ifMouseOver ? 'red': 'green'">This is paragraph</p>
+<!-- Ng-For Ng-Class -->
+<table>
+    <thead>
+        <tr>
+            <th>Sr. No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>First</th>
+            <th>Last</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let singleStudent of StudentList; let i = index; let f = first; let l= last;" [ngClass]="{
+            'background-red' : singleStudent.percentage <=70,
+            'background-blue' : singleStudent.percentage >70 && singleStudent.percentage <90,
+            'background-green' : singleStudent.percentage >=90
+        }">
+            <td>{{i+1}}</td>
+            <td>{{singleStudent.name}}</td>
+            <td>{{singleStudent.gender}}</td>
+            <td>{{singleStudent.dob}}</td>
+            <td>{{f}}</td>
+            <td>{{l}}</td>
+        </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
+<!-- NgIf Directive -->
+
+<button (click)="toggleHasPermission($event)">click</button>
+<div *ngIf="hasPermission; else elseRef">
+    This content will shown if condition is true
+</div>
+<ng-template #elseRef>
+    <div>
+        This content will shown if condition is false
+    </div>
+</ng-template>
+
+<div [ngSwitch]="num2">
+    <div *ngSwitchCase="10">
+        num2 is 10
+    </div>
+    <div *ngSwitchCase="20">
+        num2 is 20
+    </div>
+    <div *ngSwitchCase="30">
+        num2 is 30
+    </div>
+    <div *ngSwitchDefault>
+        num2 is not 10, 20, 30
+    </div>
+</div>
+<!-- Attribute Directivve Ng-Model -->
+<div>
+    <label>Name</label>
+    <input type="text" id="userName" name="userName" [(ngModel)]="student.userName">
+</div>
+
+<div>
+    <label>Dob</label>
+    <input type="date" id="dob" name="dob" [(ngModel)]="student.dob">
+</div>
+
+<div>
+    <label>email</label>
+    <input type="email" id="email" name="email" [(ngModel)]="student.email">
+</div>
+
+<div>
+    <label>Mobile NO</label>
+    <input type="text" id="mobile" name="mobile" [(ngModel)]="student.mobile">
+</div>
+
+<div>
+    {{student | json}}
+</div>
+
+<div [ngClass]="bGColor==1? 'background-red': 'background-blue'">
+    Ng class Directive
+</div>
+
+<div [ngClass]="{
+    'background-red': bGColor ==1,
+    'background-blue': bGColor !==1
+    }">
+    Ng class Directive 2
+</div>
+
+<!-- Ng-Style -->
+<table>
+    <thead>
+        <tr>
+            <th>Sr. No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>First</th>
+            <th>Last</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let singleStudent of StudentList; let i = index; let f = first; let l= last;" [ngStyle]="{ 
+            'color': singleStudent.percentage <= 70 ? 'red' : singleStudent.percentage > 70 && singleStudent.percentage < 90 ? 'blue' : singleStudent.percentage >= 90 ? 'green' : 'black' }">
+            <td>{{i+1}}</td>
+            <td>{{singleStudent.name}}</td>
+            <td>{{singleStudent.gender}}</td>
+            <td>{{singleStudent.dob}}</td>
+            <td>{{f}}</td>
+            <td>{{l}}</td>
+        </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
